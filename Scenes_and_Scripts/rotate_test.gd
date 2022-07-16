@@ -45,7 +45,7 @@ func overflow_check(axis : Array, value : int, increment : int) -> int:
 		value = 3
 		
 	else:
-		value = axis.find(value + increment)
+		value = axis.find(value) + increment
 		
 	return value 
 	
