@@ -41,3 +41,4 @@ position = Vector2( -300, 0 )
 scale = Vector2( 10, 10 )
 
 [node name="Camera" parent="." instance=ExtResource( 5 )]
+zoom = Vector2( 5, 5 )

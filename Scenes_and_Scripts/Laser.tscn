@@ -1,0 +1,121 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes_and_Scripts/Laser.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 500, 0 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShape2D:shape:extents")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 500, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Line2D:width")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "appear"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShape2D:shape:extents")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 500, 0 ), Vector2( 500, 125 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Line2D:width")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 250.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "disappear"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShape2D:shape:extents")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 500, 125 ), Vector2( 500, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Line2D:width")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 250.0, 0.0 ]
+}
+
+[node name="Laser" type="StaticBody2D"]
+position = Vector2( 5, 52 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+cast_to = Vector2( 1000, 0 )
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0, 1000, 0 )
+width = 0.0
+default_color = Color( 1, 0.0980392, 0.054902, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 500, 0 )
+shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/appear = SubResource( 2 )
+anims/disappear = SubResource( 4 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

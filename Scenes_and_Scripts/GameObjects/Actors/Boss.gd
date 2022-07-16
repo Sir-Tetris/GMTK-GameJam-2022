@@ -1,6 +1,6 @@
 extends Actor
 
-
+export(PackedScene) var laser 
 var player
 var nextPos
 
@@ -105,7 +105,11 @@ func adjustDiceFaces(rollDirection:int) -> void:
 	
 	
 	$Control/Label.text = str(facesData.top)
-
+	if facesData.top == 6:
+		laser_attack(Vector2.UP)
+		laser_attack(Vector2.RIGHT)
+		laser_attack(Vector2.DOWN)
+		laser_attack(Vector2.LEFT)
 
 # Resets the animation data once the roll is finished
 func _on_DiceAnimationSprite_animation_finished():
@@ -122,3 +126,8 @@ func _on_ParticlesAnimation_animation_finished():
 	$SpriteRoot/ParticlesAnimation.playing = false
 	$SpriteRoot/ParticlesAnimation.frame = 0
 	$SpriteRoot/ParticlesAnimation.hide()
+
+func laser_attack(direction):
+	var laser_instance = laser.instance()
+	get_tree().current_scene.add_child(laser_instance)
+	laser_instance.set_values(direction, self)
