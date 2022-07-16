@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/GameObjects/InteractableObjects/InteractableObject.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/GameObjects/GameObject.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Image/selection.png" type="Texture" id=3]
+
+[node name="InteractableObject" instance=ExtResource( 2 )]
+collision_layer = 8
+collision_mask = 29
+script = ExtResource( 1 )
+
+[node name="Sprite" parent="SpriteRoot" index="0"]
+scale = Vector2( 0.35, 0.35 )
+
+[node name="InteractionHighlight" type="Sprite" parent="SpriteRoot" index="1"]
+texture = ExtResource( 3 )
+
+[node name="InteractionRange" type="Area2D" parent="." index="2"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionRange" index="0"]
+
+[connection signal="body_entered" from="InteractionRange" to="." method="_on_InteractionRange_body_entered"]
+[connection signal="body_exited" from="InteractionRange" to="." method="_on_InteractionRange_body_exited"]

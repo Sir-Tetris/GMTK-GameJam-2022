@@ -8,6 +8,34 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "GameObject",
+"class": "Actor",
+"language": "GDScript",
+"path": "res://Scenes_and_Scripts/GameObjects/Actors/Actor.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "GameObject",
+"language": "GDScript",
+"path": "res://Scenes_and_Scripts/GameObjects/GameObject.gd"
+}, {
+"base": "GameObject",
+"class": "InteractableObject",
+"language": "GDScript",
+"path": "res://Scenes_and_Scripts/GameObjects/InteractableObjects/InteractableObject.gd"
+}, {
+"base": "Actor",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Scenes_and_Scripts/GameObjects/Actors/Player.gd"
+} ]
+_global_script_class_icons={
+"Actor": "",
+"GameObject": "",
+"InteractableObject": "",
+"Player": ""
+}
+
 [application]
 
 config/name="Gmtk Game Jam 2022"
